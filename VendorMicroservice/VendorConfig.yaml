@@ -1,16 +1,16 @@
 ﻿apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dockerconfig-deployment
+  name: vendorconfig-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: DockerConfig
+      app: VendorConfig
   template:
     metadata:
       labels:
-        app: DockerConfig
+        app: VendorConfig
     spec:
       containers:
       - name: vendorrepos
@@ -18,16 +18,16 @@ spec:
         ports:
         - containerPort: 8080
       imagePullSecrets:
-      - name: dconfigsn
+      - name: configsn
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: dockerconfig
+  name: vendorconfig
 spec:
   type: LoadBalancer
   ports:
   - port: 80
   selector:
-    app: DockerConfig
+    app: VendorConfig
